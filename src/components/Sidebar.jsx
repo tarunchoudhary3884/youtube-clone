@@ -13,7 +13,6 @@ function Sidebar() {
 
   function handleClick() {
     dispatch(setCategoryId("0"));
-    console.log("Selected category: 0");
   }
 
   if (!isMenuOpen) {

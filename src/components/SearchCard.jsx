@@ -2,7 +2,6 @@ import React from "react";
 
 function SearchCard({ video }) {
   const { thumbnails, title, description } = video.snippet;
-  console.log(video);
   return (
     <div className="p-2 shadow-md w-72 h-80">
       <div className="flex flex-col">

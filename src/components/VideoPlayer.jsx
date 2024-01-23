@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { closeMenu } from "../redux/appSlice";
 function VideoPlayer() {
   const [searchParams] = useSearchParams();
-  console.log(searchParams.get("v"));
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(closeMenu());
