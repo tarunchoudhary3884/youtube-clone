@@ -5,12 +5,17 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu, toggleSearchOpen } from "../redux/appSlice";
 import logoSvg from "../assets/logo.svg";
+import { setCategoryId } from "../redux/appSlice";
 
 function Navbar() {
   const [queryText, setQueryText] = useState("");
   const isSearchOpen = useSelector((store) => store.app.isSearchOpen);
   const dispatch = useDispatch();
+  const isMobile = useSelector((store) => store.app.isMobile);
 
+  function handleClick() {
+    dispatch(setCategoryId("0"));
+  }
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
   };
@@ -33,7 +38,7 @@ function Navbar() {
             <FaBars className="text-2xl font-bold" />
           </div>
           <Link to="/">
-            <div className="w-24">
+            <div className="w-24" onClick={handleClick}>
               <img src={logoSvg} alt="logo" />
             </div>
           </Link>

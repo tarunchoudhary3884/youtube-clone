@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaHome, FaRegCompass } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { setCategoryId } from "../redux/appSlice";
+import { closeMenu, setCategoryId } from "../redux/appSlice";
 import Button from "./Button";
 import { categories } from "../constants";
 
@@ -13,6 +13,9 @@ function Sidebar() {
 
   function handleClick() {
     dispatch(setCategoryId("0"));
+    if (isMobile) {
+      dispatch(closeMenu());
+    }
   }
 
   if (!isMenuOpen) {
