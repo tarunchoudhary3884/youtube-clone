@@ -10,20 +10,17 @@ import {
 
 import Navbar from "./Navbar";
 import ButtonList from "./Sidebar";
+import { useSelector } from "react-redux";
 
 function Body() {
   const dispatch = useDispatch();
-
+  const isMobile = useSelector((store) => store.app.isMobile);
   useEffect(() => {
     const handleResize = () => {
       const newIsMobile = window.innerWidth < 640;
-      dispatch(setIsMobile(newIsMobile));
 
-      if (newIsMobile) {
-        dispatch(closeSearchOpen());
-        dispatch(closeMenu());
-      } else {
-        dispatch(openMenu());
+      if (newIsMobile !== isMobile) {
+        dispatch(setIsMobile(newIsMobile));
       }
     };
 
@@ -34,6 +31,14 @@ function Body() {
       window.removeEventListener("resize", handleResize);
     };
   }, [dispatch]);
+  useEffect(() => {
+    if (isMobile) {
+      dispatch(closeSearchOpen());
+      dispatch(closeMenu());
+    } else {
+      dispatch(openMenu());
+    }
+  }, [isMobile]);
 
   return (
     <div className="w-full h-screen p-2 flex flex-col">

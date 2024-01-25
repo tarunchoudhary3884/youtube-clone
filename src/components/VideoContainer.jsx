@@ -4,6 +4,7 @@ import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { openMenu } from "../redux/appSlice";
+import Shimmer from "./Shimmer";
 
 function VideoContainer() {
   const videoCategoryId = useSelector((store) => store.app.categoryId);
@@ -22,6 +23,7 @@ function VideoContainer() {
 
   async function getVideos() {
     try {
+      setLoading(true);
       const response = await fetch(
         youtube_video_list_url +
           `&videoCategoryId=${videoCategoryId}&key=${
@@ -47,7 +49,16 @@ function VideoContainer() {
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-wrap justify-center overflow-y-auto">
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+      </div>
+    );
   }
 
   if (error) {
